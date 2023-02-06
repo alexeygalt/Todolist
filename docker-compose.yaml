@@ -1,6 +1,35 @@
-version: '3.8'
+version: "3.9"
 
 services:
+  front:
+    image: sermalenk/skypro-front:lesson-38
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: .
+    depends_on:
+      migration:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
+    volumes:
+      - ./.env:/app/.env
+
+  migration:
+    build:
+      context: .
+#    platform: linux/amd64
+    depends_on:
+      db:
+        condition: service_healthy
+    command: python manage.py migrate
+    volumes:
+      - ./.env:/app/.env
+
   db:
     image: postgres:latest
     volumes:
@@ -14,6 +43,8 @@ services:
       interval: 3s
       timeout: 3s
       retries: 15
+#    command:
+#      - apt install libpq
     ports:
     - "5432:5432"
 
