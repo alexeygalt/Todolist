@@ -24,6 +24,8 @@ services:
     build:
       context: .
     image: alexeygalt/todolist
+    environment:
+      - DOCKER_DEFAULT_PLATFORM=${DOCKER_DEFAULT_PLATFORM}
 #    platform: linux/amd64
     depends_on:
       db:

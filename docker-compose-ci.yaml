@@ -20,6 +20,8 @@ services:
 
   migration:
     image: alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    environment:
+      - DOCKER_DEFAULT_PLATFORM=${DOCKER_DEFAULT_PLATFORM}
 #    platform: linux/amd64
     depends_on:
       db:
