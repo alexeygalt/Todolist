@@ -22,7 +22,8 @@ jobs:
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-      DOCKER_DEFAULT_PLATFORM: ${{ secrets.DOCKER_DEFAULT_PLATFORM }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+#      DOCKER_DEFAULT_PLATFORM: ${{ secrets.DOCKER_DEFAULT_PLATFORM }}
 
     steps:
       - name: clone code
@@ -31,14 +32,14 @@ jobs:
         run: |
           mkdir deploy
           cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
-          cat .docker_env-ci | envsubst > deploy/.docker_env
+          cat .docker_env-ci | envsubst > deploy/.env
       - name: copy files to server
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "deploy/docker-compose.yaml,deploy/.docker_env"
+          source: "deploy/docker-compose.yaml,deploy/.env"
           target: "app"
           strip_components: 1
       - name: deploy app
