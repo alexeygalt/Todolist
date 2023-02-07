@@ -49,6 +49,7 @@ jobs:
           script: | 
             cd app
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker compose up -d
+            
 
 
 
