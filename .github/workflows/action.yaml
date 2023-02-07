@@ -10,7 +10,7 @@ jobs:
       - name: clone code
         uses: actions/checkout@v3
       - name: docker build
-        run: docker build - t alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
+        run: docker build -t alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
       - name: docker login
         run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }}
       - name: docker push
