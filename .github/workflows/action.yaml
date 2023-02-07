@@ -3,18 +3,18 @@ on:
   push:
     branches:
       - master
-  jobs:
-    build_and_push:
-      runs-on : ubuntu-latest
-      steps:
-        - name: clone code
-          uses: actions/checkout@v3
-        - name: docker build
-          run: docker build - t alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
-        - name: docker login
-          run : echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }}
-        - name: docker push
-          run: docker push alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone code
+        uses: actions/checkout@v3
+      - name: docker build
+        run: docker build - t alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
+      - name: docker login
+        run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }}
+      - name: docker push
+        run: docker push alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push
