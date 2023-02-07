@@ -9,9 +9,7 @@ services:
       - api
 
   api:
-    build:
-      context: .
-    image: alexeygalt/todolist
+    image: alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     depends_on:
       migration:
         condition: service_completed_successfully
@@ -21,9 +19,7 @@ services:
       - ./.env:/app/.env
 
   migration:
-    build:
-      context: .
-    image: alexeygalt/todolist
+    image: alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
 #    platform: linux/amd64
     depends_on:
       db:

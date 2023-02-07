@@ -1,0 +1,41 @@
+name: Build_and_deploy_action
+on:
+  push:
+    branches:
+      - master
+  jobs:
+    build_and_push:
+      runs-on : ubuntu-latest
+      steps:
+        - name: clone code
+          uses: actions/checkout@v3
+        - name: docker build
+          run: docker build - t alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
+        - name: docker login
+          run : echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }}
+        - name: docker push
+          run: docker push alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_and_push
+    steps:
+      - name: clone code
+        uses: actions/checkout@v3
+      - name: render config
+        run: |
+          mkdir deploy
+          cat docker-compose.yaml | envsubst > deploy/docker-compose.yaml
+          cat .docker_env-ci | envsubst > deploy/.docker_env
+      - name: copy files to server
+        run: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: "deploy/docker-compose.yaml,deploy/.docker_env"
+          target: "app"
+          strip_components: 1
+
+
+
+
