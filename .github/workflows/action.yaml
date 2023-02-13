@@ -23,6 +23,9 @@ jobs:
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      SOCIAL_AUTH_VK_OAUTH2_KEY: ${{ secrets.SOCIAL_AUTH_VK_OAUTH2_KEY }}
+      SOCIAL_AUTH_VK_OAUTH2_SECRET: ${{ secrets.SOCIAL_AUTH_VK_OAUTH2_SECRET }}
+
 #      DOCKER_DEFAULT_PLATFORM: ${{ secrets.DOCKER_DEFAULT_PLATFORM }}
 
     steps:
