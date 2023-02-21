@@ -42,9 +42,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'rest_framework',
+    'drf_spectacular',
     "corsheaders",
     'social_django',
+    'django_filters',
     "core",
+    "goals",
 
 ]
 
@@ -81,8 +84,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "todolist.wsgi.application"
 
-# Database
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    # 'PAGE_SIZE': 10,
+}
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Todolist API',
+    'DESCRIPTION': 'todolist web application with the most basic features of most web apps',
+    'VERSION': '1.0.0',
+}
 
 
 DATABASES = {
@@ -121,7 +134,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
