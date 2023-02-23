@@ -19,8 +19,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return data
 
     def validate_password_repeat(self, data):
-        if data != self.initial_data.get("password"):
-            raise serializers.ValidationError("Пароли не одинаковые")
+        if data != self.initial_data.get('password'):
+            raise serializers.ValidationError('Пароли не одинаковые')
         return data
 
     def create(self, validated_data):
@@ -56,7 +56,7 @@ class UserChangePasswordSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         if not instance.check_password(validated_data.get('old_password')):
-            raise serializers.ValidationError({"old_password": ["Неверный пароль"]})
+            raise serializers.ValidationError({'old_password': ['Неверный пароль']})
 
         instance.set_password(validated_data.get('new_password'))
         instance.save()

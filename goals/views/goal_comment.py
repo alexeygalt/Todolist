@@ -22,7 +22,7 @@ class GoalCommentListView(ListAPIView):
         filters.OrderingFilter,
         DjangoFilterBackend
     )
-    filterset_fields = ("goal",)
+    filterset_fields = ('goal',)
     ordering = ('-id',)
 
     def get_queryset(self):

@@ -9,12 +9,12 @@ class CreateGoalCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GoalComment
-        fields = "__all__"
-        read_only_fields = ("id", "created", "updated", "user")
+        fields = '__all__'
+        read_only_fields = ('id', 'created', 'updated', 'user')
 
     def validate_category(self, value):
-        if value.user != self.context["request"].user:
-            raise serializers.ValidationError("not owner of category")
+        if value.user != self.context['request'].user:
+            raise serializers.ValidationError('not owner of category')
 
         return value
 
@@ -24,11 +24,11 @@ class GoalCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GoalComment
-        fields = "__all__"
-        read_only_fields = ("id", "created", "updated", "user", "goal")
+        fields = '__all__'
+        read_only_fields = ('id', 'created', 'updated', 'user', 'goal')
 
     def validate_category(self, value):
-        if value.user != self.context["request"].user:
-            raise serializers.ValidationError("not owner of category")
+        if value.user != self.context['request'].user:
+            raise serializers.ValidationError('not owner of category')
 
         return value

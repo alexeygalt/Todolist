@@ -24,8 +24,8 @@ class GoalCategoryListView(ListAPIView):
         filters.OrderingFilter,
         filters.SearchFilter,
     )
-    ordering_fields = ("title", "created",)
-    search_fields = ("title",)
+    ordering_fields = ('title', 'created',)
+    search_fields = ('title',)
 
     def get_queryset(self):
         return GoalCategory.objects.filter(

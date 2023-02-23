@@ -20,16 +20,16 @@ class UserRegistrationView(CreateAPIView):
     serializer_class = UserRegistrationSerializer
 
 
-@method_decorator(csrf_exempt, name="dispatch")
+@method_decorator(csrf_exempt, name='dispatch')
 class UserLoginView(View):
     def post(self, request):
         data = json.loads(request.body)
         username = data.get('username')
         if username in [None, '']:
-            return JsonResponse({"username": ["Введите Имя пользователя"]}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({'username': ['Введите Имя пользователя']}, status=status.HTTP_400_BAD_REQUEST)
         password = data.get('password')
         if password in [None, '']:
-            return JsonResponse({"password": ["Введите пароль"]}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({'password': ['Введите пароль']}, status=status.HTTP_400_BAD_REQUEST)
 
         user = authenticate(request, username=username, password=password)
 
@@ -61,5 +61,3 @@ class PasswordUpdateView(UpdateAPIView):
     def get_object(self):
         obj = get_user(self.request)
         return obj
-
-

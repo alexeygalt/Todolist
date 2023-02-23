@@ -9,17 +9,17 @@ from goals.models.goal_category import GoalCategory
 
 @admin.register(GoalCategory)
 class GoalCategoryAdmin(admin.ModelAdmin):
-    list_display = ("title", "user", "created", "updated")
-    search_fields = ("title", "user__username")
+    list_display = ('title', 'user', 'created', 'updated')
+    search_fields = ('title', 'user__username')
 
 
 @admin.register(Goal)
 class GoalAdmin(admin.ModelAdmin):
-    list_display = ("title", "user", "created", "updated")
-    search_fields = ("title", "user__username")
+    list_display = ('title', 'user', 'created', 'updated')
+    search_fields = ('title', 'user__username')
 
 
 @admin.register(GoalComment)
 class GoalCommentAdmin(admin.ModelAdmin):
-    list_display = ("text", "user", "goal", "created", "updated")
-    search_fields = ("title", "user__username")
+    list_display = ('text', 'user', 'goal', 'created', 'updated')
+    search_fields = ('title', 'user__username')
