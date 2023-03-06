@@ -16,11 +16,11 @@ class BoardCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Board
-        read_only_fields = ("id", "created", "updated")
-        fields = "__all__"
+        read_only_fields = ('id', 'created', 'updated')
+        fields = '__all__'
 
     def create(self, validated_data):
-        user = validated_data.pop("user")
+        user = validated_data.pop('user')
         board = Board.objects.create(**validated_data)
         BoardParticipant.objects.create(
             user=user, board=board, role=BoardParticipant.Role.owner
@@ -33,13 +33,13 @@ class BoardParticipantSerializer(serializers.ModelSerializer):
         required=True, choices=BoardParticipant.Role.choices
     )
     user = serializers.SlugRelatedField(
-        slug_field="username", queryset=User.objects.all()
+        slug_field='username', queryset=User.objects.all()
     )
 
     class Meta:
         model = BoardParticipant
-        fields = "__all__"
-        read_only_fields = ("id", "created", "updated", "board")
+        fields = '__all__'
+        read_only_fields = ('id', 'created', 'updated', 'board')
 
 
 class BoardSerializer(serializers.ModelSerializer):
@@ -48,8 +48,8 @@ class BoardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Board
-        fields = "__all__"
-        read_only_fields = ("id", "created", "updated")
+        fields = '__all__'
+        read_only_fields = ('id', 'created', 'updated')
 
     def update(self, instance, validated_data):
         owner = validated_data.pop('user')
@@ -63,8 +63,8 @@ class BoardSerializer(serializers.ModelSerializer):
                 if old_participant.user_id not in new_by_part:
                     old_participant.delete()
                 else:
-                    if old_participant.role != new_by_part[old_participant.user_id]["role"]:
-                        old_participant.role = new_by_part[old_participant.user_id]["role"]
+                    if old_participant.role != new_by_part[old_participant.user_id]['role']:
+                        old_participant.role = new_by_part[old_participant.user_id]['role']
                         old_participant.save()
 
                     new_by_part.pop(old_participant.user_id)
@@ -76,5 +76,5 @@ class BoardSerializer(serializers.ModelSerializer):
 
             instance.title = validated_data['title']
             instance.save()
-            
+
         return instance

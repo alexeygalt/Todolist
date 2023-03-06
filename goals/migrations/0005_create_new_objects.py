@@ -8,15 +8,15 @@ def create_objects(apps, schema_editor):
     # Импортировать настоящие классы – плохая практика
     # так как в будущем вы можете удалить/переименовать эти модели, и тогда у вас будут ошибки импорта
 
-    User = apps.get_model("core", "User")
-    Board = apps.get_model("goals", "Board")
-    BoardParticipant = apps.get_model("goals", "BoardParticipant")
-    GoalCategory = apps.get_model("goals", "GoalCategory")
+    User = apps.get_model('core', 'User')
+    Board = apps.get_model('goals', 'Board')
+    BoardParticipant = apps.get_model('goals', 'BoardParticipant')
+    GoalCategory = apps.get_model('goals', 'GoalCategory')
 
     with transaction.atomic():  # Применяем все изменения одной транзакцией
         for user in User.objects.all():  # Для каждого пользователя
             new_board = Board.objects.create(
-                title="Мои цели",
+                title='Мои цели',
                 created=timezone.now(),  # Проставляем вручную по той же причине, что описана вверху
                 updated=timezone.now()
             )

@@ -25,6 +25,7 @@ jobs:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       SOCIAL_AUTH_VK_OAUTH2_KEY: ${{ secrets.SOCIAL_AUTH_VK_OAUTH2_KEY }}
       SOCIAL_AUTH_VK_OAUTH2_SECRET: ${{ secrets.SOCIAL_AUTH_VK_OAUTH2_SECRET }}
+      TG_TOKEN: ${{ secrets.TG_TOKEN }}
 
 #      DOCKER_DEFAULT_PLATFORM: ${{ secrets.DOCKER_DEFAULT_PLATFORM }}
 
@@ -54,4 +55,3 @@ jobs:
           script: |
             cd app
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker compose up -d
-

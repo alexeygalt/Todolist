@@ -22,7 +22,7 @@ class CreateGoalCommentSerializer(serializers.ModelSerializer):
         )
 
         if not role_use:
-            raise ValidationError("Недостаточно прав")
+            raise ValidationError('Недостаточно прав')
 
         return attrs
 

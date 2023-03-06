@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   front:
-    image: sermalenk/skypro-front:lesson-37
+    image: sermalenk/skypro-front:lesson-38
     ports:
       - "80:80"
     depends_on:
@@ -15,6 +15,18 @@ services:
         condition: service_completed_successfully
       db:
         condition: service_healthy
+    volumes:
+      - ./.env:/app/.env
+
+  bot:
+    image: naborslov/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    restart: always
+    depends_on:
+      migration:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
+    command: python manage.py runbot
     volumes:
       - ./.env:/app/.env
 

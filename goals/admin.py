@@ -28,12 +28,12 @@ class GoalCommentAdmin(admin.ModelAdmin):
 
 @admin.register(Board)
 class BoardAdmin(admin.ModelAdmin):
-    list_display = ("title",)
-    search_fields = ("title",)
-    list_display_links = ("title",)
+    list_display = ('title',)
+    search_fields = ('title',)
+    list_display_links = ('title',)
 
 
 @admin.register(BoardParticipant)
 class BoardParticipantAdmin(admin.ModelAdmin):
-    list_display = ("user_id", "board_id", "role")
-    list_display_links = ("user_id", "board_id", "role")
+    list_display = ('user_id', 'board_id', 'role')
+    list_display_links = ('user_id', 'board_id', 'role')

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_filters',
     'core',
     'goals',
+    'bot',
 
 ]
 
@@ -96,7 +97,6 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'todolist web application with the most basic features of most web apps',
     'VERSION': '1.0.0',
 }
-
 
 DATABASES = {
     'default': env.db(),

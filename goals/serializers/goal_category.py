@@ -22,7 +22,7 @@ class GoalCreateSerializer(serializers.ModelSerializer):
         ).exists()
 
         if not role_user:
-            raise ValidationError("Недостаточно прав")
+            raise ValidationError('Недостаточно прав')
 
         return attrs
 
