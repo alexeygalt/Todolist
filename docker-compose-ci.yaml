@@ -19,7 +19,7 @@ services:
       - ./.env:/app/.env
 
   bot:
-    image: naborslov/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: alexeygalt/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     restart: always
     depends_on:
       migration:
